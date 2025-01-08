@@ -7,9 +7,9 @@ import GithubContext from "../../context/github/GithubContext";
 function UserResults() {
   const { users, loading, fetchUsers } = useContext(GithubContext);
 
-  useEffect(() => {
-    fetchUsers();
-  }, []); //[]는 앱 시작시 실행한다는 뜻이다
+  // useEffect(() => {
+  //   fetchUsers();
+  // }, []); //[]는 앱 시작시 실행한다는 뜻이다
 
   if (!loading) {
     return (
