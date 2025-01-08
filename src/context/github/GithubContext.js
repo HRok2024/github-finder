@@ -10,8 +10,6 @@ export const GithubProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   const fetchUsers = () => {
-    //   console.log("주소" + process.env.REACT_APP_GITHUB_URL);
-    //   console.log("토큰" + process.env.REACT_APP_GITHUB_TOKEN);
     fetch(`${GITHUB_URL}/users`, {
       headers: {
         Authorization: `Bearer ${GITHUB_TOKEN}`,
