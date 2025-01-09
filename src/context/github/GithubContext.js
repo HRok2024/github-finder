@@ -51,6 +51,7 @@ export const GithubProvider = ({ children }) => {
   //유저 공개 리파지토리 리스트
   const getUserRepos = (login) => {
     setLoading(true);
+    //쿼리파라미터 생성
     const params = new URLSearchParams({
       sort: "created",
       per_page: 10,
