@@ -2,10 +2,10 @@ import React from "react";
 import UserResults from "../components/users/UserResults";
 import UserSearch from "../components/users/UserSearch";
 
-function Home() {
+function Home({ handleAlert }) {
   return (
     <>
-      <UserSearch />
+      <UserSearch handleAlert={handleAlert} />
       <UserResults />
     </>
   );
