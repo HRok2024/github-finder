@@ -31,6 +31,7 @@ export const GithubProvider = ({ children }) => {
       })
       .catch((err) => console.log(err));
   };
+  //깃허브 유저찾기
   const getUser = (login) => {
     setLoading(true);
     fetch(`${GITHUB_URL}/users/${login}`, {
@@ -45,11 +46,16 @@ export const GithubProvider = ({ children }) => {
         setLoading(false);
       })
       .catch((err) => (window.location = "/notfound"));
+    getUserRepos(login);
   };
   //유저 공개 리파지토리 리스트
   const getUserRepos = (login) => {
     setLoading(true);
-    fetch(`${GITHUB_URL}/users/${login}/repos`, {
+    const params = new URLSearchParams({
+      sort: "created",
+      per_page: 10,
+    });
+    fetch(`${GITHUB_URL}/users/${login}/repos?${params}`, {
       headers: {
         Authorization: `Bearer ${GITHUB_TOKEN}`,
       },
@@ -67,11 +73,11 @@ export const GithubProvider = ({ children }) => {
       value={{
         users,
         user,
+        repos,
         loading,
         searchUsers,
         getUser,
         clearUsers,
-        getUserRepos,
       }}
     >
       {children}
