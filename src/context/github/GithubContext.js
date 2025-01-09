@@ -7,8 +7,13 @@ const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
 
 export const GithubProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
+  const [repos, setRepos] = useState([]);
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
+  //유저 클리어
+  const clearUsers = () => {
+    setUsers([]);
+  };
   //키워드로 유저찾기
   const searchUsers = (text) => {
     setLoading(true);
@@ -41,9 +46,33 @@ export const GithubProvider = ({ children }) => {
       })
       .catch((err) => (window.location = "/notfound"));
   };
+  //유저 공개 리파지토리 리스트
+  const getUserRepos = (login) => {
+    setLoading(true);
+    fetch(`${GITHUB_URL}/users/${login}/repos`, {
+      headers: {
+        Authorization: `Bearer ${GITHUB_TOKEN}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setRepos(data);
+        setLoading(false);
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <GithubContext.Provider
-      value={{ users, user, loading, searchUsers, getUser }}
+      value={{
+        users,
+        user,
+        loading,
+        searchUsers,
+        getUser,
+        clearUsers,
+        getUserRepos,
+      }}
     >
       {children}
     </GithubContext.Provider>
