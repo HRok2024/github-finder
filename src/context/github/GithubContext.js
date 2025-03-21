@@ -10,10 +10,12 @@ export const GithubProvider = ({ children }) => {
   const [repos, setRepos] = useState([]);
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
+
   //유저 클리어
   const clearUsers = () => {
     setUsers([]);
   };
+
   //키워드로 유저찾기
   const searchUsers = (text) => {
     setLoading(true);
@@ -31,6 +33,7 @@ export const GithubProvider = ({ children }) => {
       })
       .catch((err) => console.log(err));
   };
+
   //깃허브 유저찾기
   const getUser = (login) => {
     setLoading(true);
@@ -48,9 +51,11 @@ export const GithubProvider = ({ children }) => {
       .catch((err) => (window.location = "/notfound"));
     getUserRepos(login);
   };
+
   //유저 공개 리파지토리 리스트
   const getUserRepos = (login) => {
     setLoading(true);
+
     //쿼리파라미터 생성
     const params = new URLSearchParams({
       sort: "created",
@@ -69,6 +74,7 @@ export const GithubProvider = ({ children }) => {
       })
       .catch((err) => console.log(err));
   };
+
   return (
     <GithubContext.Provider
       value={{
